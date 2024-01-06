@@ -89,9 +89,23 @@ var upperCasedCharacters = [
 ];
 
 // Function to prompt user for password options
+
 function getPasswordOptions() {
 
+  // Prompt for length of password
+  var validResponse = false;
+  while (!validResponse) {
+    var passwordLength = prompt("How long does the password need to be?");
+    if (passwordLength >= 8 && passwordLength <= 128) validResponse = true;
+    else confirm("Please choose a value between 8 and 128, inclusive");
+  }
+
+  // Return collected responses back to main code
+  return [passwordLength];
+
 }
+const [passwordLengthUser] = getPasswordOptions();
+console.log(passwordLengthUser);
 
 // Function for getting a random element from an array
 function getRandom(arr) {
