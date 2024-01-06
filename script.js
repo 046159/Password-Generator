@@ -100,16 +100,33 @@ function getPasswordOptions() {
     else alert("Please choose a value between 8 and 128, inclusive");
   }
 
-  // Prompt for Lowercase
-  var lowercaseLocal = confirm("Do you want to include lowercase characters?");
+  validResponse = false;
+  while (!validResponse) {
+
+    // Prompt for Lowercase
+    var lowercaseLocal = confirm("Do you want to include lowercase characters?");
+
+    // Prompt for Uppercase
+    var uppercaseLocal = confirm("Do you want to include uppercase characters?");
+
+    // Prompt for Numeric
+    var numericLocal = confirm("Do you want to include numbers?");
+
+    // Prompt for Special Characters
+    var specialLocal = confirm("Do you want to include special characters?");
+
+    if (lowercaseLocal === true || uppercaseLocal === true || numericLocal === true || specialLocal === true) validResponse = true;
+    else alert("You must at least choose one character type from: lowercase, uppercase, numeric, and special characters");
+
+  }
 
   // Return collected responses back to main code
-  return [passwordLengthLocal, lowercaseLocal];
+  return [passwordLengthLocal, lowercaseLocal, uppercaseLocal, numericLocal, specialLocal];
 
 }
-9
-const [passwordLength, lowercase] = getPasswordOptions();
-console.log(passwordLength, lowercase);
+
+const [passwordLength, lowercase, uppercase, numeric, special] = getPasswordOptions();
+console.log(`Length: ${passwordLength}\nLowercase: ${lowercase}\nUppercase: ${uppercase}\nNumeric: ${numeric}\nSpecial: ${special}`);
 
 // Function for getting a random element from an array
 function getRandom(arr) {
