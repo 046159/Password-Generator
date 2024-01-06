@@ -89,7 +89,6 @@ var upperCasedCharacters = [
 ];
 
 // Function to prompt user for password options
-
 function getPasswordOptions() {
 
   // Prompt for Password Length
@@ -125,8 +124,19 @@ function getPasswordOptions() {
 
 }
 
+// Get password options from user
 const [passwordLength, lowercase, uppercase, numeric, special] = getPasswordOptions();
-console.log(`Length: ${passwordLength}\nLowercase: ${lowercase}\nUppercase: ${uppercase}\nNumeric: ${numeric}\nSpecial: ${special}`);
+
+// Below outputs what the user responded with in getPasswordOptions function
+// console.log(`Length: ${passwordLength}\nLowercase: ${lowercase}\nUppercase: ${uppercase}\nNumeric: ${numeric}\nSpecial: ${special}`);
+
+//Construct the possible list of required characters
+var possibleCharacters = [];
+if (lowercase) possibleCharacters = possibleCharacters.concat(lowerCasedCharacters);
+if (uppercase) possibleCharacters = possibleCharacters.concat(upperCasedCharacters);
+if (numeric) possibleCharacters = possibleCharacters.concat(numericCharacters);
+if (special) possibleCharacters = possibleCharacters.concat(specialCharacters);
+console.log(possibleCharacters);
 
 // Function for getting a random element from an array
 function getRandom(arr) {
