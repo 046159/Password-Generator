@@ -94,7 +94,7 @@ function getPasswordOptions() {
   // Prompt for Password Length
   var validResponse = false;
   while (!validResponse) {
-    var passwordLengthLocal = prompt("How long does the password need to be?");
+    var passwordLengthLocal = Number(prompt("How long does the password need to be?"));
     if (passwordLengthLocal >= 8 && passwordLengthLocal <= 128) validResponse = true;
     else alert("Please choose a value between 8 and 128, inclusive");
   }
@@ -128,7 +128,7 @@ function getPasswordOptions() {
 const [passwordLength, lowercase, uppercase, numeric, special] = getPasswordOptions();
 
 // Below outputs what the user responded with in getPasswordOptions function
-// console.log(`Length: ${passwordLength}\nLowercase: ${lowercase}\nUppercase: ${uppercase}\nNumeric: ${numeric}\nSpecial: ${special}`);
+console.log(`Length: ${passwordLength}\nLowercase: ${lowercase}\nUppercase: ${uppercase}\nNumeric: ${numeric}\nSpecial: ${special}`);
 
 //Construct the possible list of required characters
 var possibleCharacters = [];
@@ -146,13 +146,50 @@ function getRandom(arr) {
 
 }
 
-//Get a char from the selelected set
-var randomChar = getRandom(possibleCharacters);
-console.log(randomChar)
-
 // Function to generate password with user input
 function generatePassword() {
 
+  var password = "";
+  var randomChar;
+  for (var i = 0; i < passwordLength; i++) {
+    //console.log(getRandom(possibleCharacters));
+    randomChar = getRandom(possibleCharacters);
+    // 8console.log(randomChar);
+    password += randomChar;
+  }
+  //var randomChar = getRandom(possibleCharacters);
+  console.log(`Password: ${password}`);
+  return password;
+}
+
+function meetsRequirements() {
+  var containsLC = false;
+  var containsUC = false;
+  var containsN = false;
+  var containsSC = false;
+  for (var i = 0; i < generatedPassword.length; i++) {
+    // console.log(generatedPassword.charAt(i));
+    if (lowerCasedCharacters.includes(generatedPassword.charAt(i))) containsLC = true;
+    if (upperCasedCharacters.includes(generatedPassword.charAt(i))) containsUC = true;
+    if (numericCharacters.includes(generatedPassword.charAt(i))) containsN = true;
+    if (specialCharacters.includes(generatedPassword.charAt(i))) containsSC = true;
+  }
+
+  if ((lowercase && !containsLC) || (uppercase && !containsUC) || (numeric && !containsN) || (special && !containsSC)) {
+    console.log("Password did not meet requirements, re-trying");
+    return false;
+  }
+  else {
+    console.log("Password meets requirements!");
+    return true;
+  }
+
+}
+
+validPassword = false;
+while (!validPassword) {
+  var generatedPassword = generatePassword();
+  if (meetsRequirements()) validPassword = true;
 }
 
 // Get references to the #generate element
