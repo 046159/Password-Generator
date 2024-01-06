@@ -92,20 +92,24 @@ var upperCasedCharacters = [
 
 function getPasswordOptions() {
 
-  // Prompt for length of password
+  // Prompt for Password Length
   var validResponse = false;
   while (!validResponse) {
-    var passwordLength = prompt("How long does the password need to be?");
-    if (passwordLength >= 8 && passwordLength <= 128) validResponse = true;
-    else confirm("Please choose a value between 8 and 128, inclusive");
+    var passwordLengthLocal = prompt("How long does the password need to be?");
+    if (passwordLengthLocal >= 8 && passwordLengthLocal <= 128) validResponse = true;
+    else alert("Please choose a value between 8 and 128, inclusive");
   }
 
+  // Prompt for Lowercase
+  var lowercaseLocal = confirm("Do you want to include lowercase characters?");
+
   // Return collected responses back to main code
-  return [passwordLength];
+  return [passwordLengthLocal, lowercaseLocal];
 
 }
-const [passwordLengthUser] = getPasswordOptions();
-console.log(passwordLengthUser);
+9
+const [passwordLength, lowercase] = getPasswordOptions();
+console.log(passwordLength, lowercase);
 
 // Function for getting a random element from an array
 function getRandom(arr) {
