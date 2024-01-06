@@ -141,7 +141,14 @@ console.log(possibleCharacters);
 // Function for getting a random element from an array
 function getRandom(arr) {
 
+  var char = arr[Math.floor(Math.random() * arr.length)];
+  return char;
+
 }
+
+//Get a char from the selelected set
+var randomChar = getRandom(possibleCharacters);
+console.log(randomChar)
 
 // Function to generate password with user input
 function generatePassword() {
